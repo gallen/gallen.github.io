@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>My Site</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2020-04-10T00:00:00-04:00</updated><entry><title>NJ Covid-19 Map</title><link href="/nj-covid-19-map.html" rel="alternate"></link><published>2020-04-10T00:00:00-04:00</published><updated>2020-04-10T00:00:00-04:00</updated><author><name>Yan</name></author><id>tag:None,2020-04-10:/nj-covid-19-map.html</id><summary type="html">&lt;h1&gt;NJ Covid-19&lt;/h1&gt;
+&lt;p&gt;Avinci club is cool!&lt;/p&gt;
+&lt;p&gt;Yes!&lt;/p&gt;
+&lt;div id="container2" style="height: 50%; width: 100%; margin: 0 auto;"&gt;
+  Downloading chart...
+&lt;/div&gt;
+
+&lt;div id="container" style="height: 50%; width: 100%; margin: 0 auto; text-align:center; line-height: 520px"&gt;
+  Downloading map...
+&lt;/div&gt;
+
+&lt;script src="https://code.highcharts.com/maps/highmaps.js"&gt;&lt;/script&gt;
+
+&lt;script src="https://code.highcharts.com/maps/modules/data.js"&gt;&lt;/script&gt;
+
+&lt;script src="https://code.highcharts.com/maps/modules/exporting.js"&gt;&lt;/script&gt;
+
+&lt;script src="https://code.highcharts.com/maps/modules/offline-exporting.js"&gt;&lt;/script&gt;
+
+&lt;script src="https://code.highcharts.com/mapdata/countries/us/us-nj-all.js"&gt;&lt;/script&gt;
+
+&lt;script&gt;
+
+Highcharts.getJSON(
+  'https://services1.arcgis.com/0MSEUqKaxRlEPj5g/ArcGIS/rest/services/COVID19_Counties_View/FeatureServer/0/query?where=state_fips%3D34&amp;objectIds=&amp;time=&amp;geometry=&amp;geometryType=esriGeometryEnvelope&amp;inSR=&amp;spatialRel=esriSpatialRelIntersects&amp;resultType=none&amp;distance=0.0&amp;units=esriSRUnit_Meter&amp;returnGeodetic=false&amp;outFields=label%2Cconfirmed%2C+confirmed_per_100k …&lt;/script&gt;</summary><content type="html">&lt;h1&gt;NJ Covid-19&lt;/h1&gt;
+&lt;p&gt;Avinci club is cool!&lt;/p&gt;
+&lt;p&gt;Yes!&lt;/p&gt;
+&lt;div id="container2" style="height: 50%; width: 100%; margin: 0 auto;"&gt;
+  Downloading chart...
+&lt;/div&gt;
+
+&lt;div id="container" style="height: 50%; width: 100%; margin: 0 auto; text-align:center; line-height: 520px"&gt;
+  Downloading map...
+&lt;/div&gt;
+
+&lt;script src="https://code.highcharts.com/maps/highmaps.js"&gt;&lt;/script&gt;
+
+&lt;script src="https://code.highcharts.com/maps/modules/data.js"&gt;&lt;/script&gt;
+
+&lt;script src="https://code.highcharts.com/maps/modules/exporting.js"&gt;&lt;/script&gt;
+
+&lt;script src="https://code.highcharts.com/maps/modules/offline-exporting.js"&gt;&lt;/script&gt;
+
+&lt;script src="https://code.highcharts.com/mapdata/countries/us/us-nj-all.js"&gt;&lt;/script&gt;
+
+&lt;script&gt;
+
+Highcharts.getJSON(
+  'https://services1.arcgis.com/0MSEUqKaxRlEPj5g/ArcGIS/rest/services/COVID19_Counties_View/FeatureServer/0/query?where=state_fips%3D34&amp;objectIds=&amp;time=&amp;geometry=&amp;geometryType=esriGeometryEnvelope&amp;inSR=&amp;spatialRel=esriSpatialRelIntersects&amp;resultType=none&amp;distance=0.0&amp;units=esriSRUnit_Meter&amp;returnGeodetic=false&amp;outFields=label%2Cconfirmed%2C+confirmed_per_100k%2Cpopulation_2017%2C+fips%2Ccounty%2Cstate_fips&amp;returnGeometry=false&amp;returnCentroid=false&amp;featureEncoding=esriDefault&amp;multipatchOption=xyFootprint&amp;maxAllowableOffset=&amp;geometryPrecision=&amp;outSR=&amp;datumTransformation=&amp;applyVCSProjection=false&amp;returnIdsOnly=false&amp;returnUniqueIdsOnly=false&amp;returnCountOnly=false&amp;returnExtentOnly=false&amp;returnQueryGeometry=false&amp;returnDistinctValues=false&amp;cacheHint=false&amp;orderByFields=&amp;groupByFieldsForStatistics=&amp;outStatistics=&amp;having=&amp;resultOffset=&amp;resultRecordCount=&amp;returnZ=false&amp;returnM=false&amp;returnExceededLimitFeatures=true&amp;quantizationParameters=&amp;sqlFormat=none&amp;f=pjson&amp;token=',
+  function (dataIn) {
+    var data = dataIn.features;
+    data.forEach(function(d) {
+      d.label = d.attributes.label;
+      d.value = d.attributes.confirmed_per_100k;
+      d.name = d.attributes.county;
+      d.y = d.attributes.confirmed;
+      if (d.attributes.fips &gt;= 10000){
+        d.code1 = '' + d.attributes.fips;      
+      } else if (d.attributes.fips &gt;= 1000){
+        d.code1 = '0' + d.attributes.fips; 
+      }
+ else if (d.attributes.fips &gt;= 1000){
+        d.code1 = '0' + d.attributes.fips; 
+      }
+
+    })
+
+ Highcharts.chart('container2', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'NJ COVID-19 By County'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: &lt;b&gt;{point.y:.0f}&lt;/b&gt;'
+    },
+    accessibility: {
+        point: {
+            valueSuffix: '%'
+        }
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '&lt;b&gt;{point.name}&lt;/b&gt;: {point.percentage:.0f} %',
+                connectorColor: 'silver'
+            }
+        }
+    },
+    series: [{
+        name: 'Confirmed Cases',
+        data: data,
+    }]
+});   
+    /**
+     * Data parsed from http://www.bls.gov/lau/#tables
+     *
+     * 1. Go to http://www.bls.gov/lau/laucntycur14.txt (or similar, updated
+     *  datasets)
+     * 2. In the Chrome Developer tools console, run this code:
+     *  copy(JSON.stringify(document.body.innerHTML.split('\n').filter(function (s) { return s.indexOf('&lt;PUT DATE HERE IN FORMAT e.g. Feb-14&gt;') !== -1; }).map(function (row) { row = row.split('|'); return { code: 'us-' + row[3].trim().slice(-2).toLowerCase() + '-' + row[2].trim(), name: row[3].trim(), value: parseFloat(row[8]) }; })))
+     * 3. The data is now on your clipboard, paste it below
+     * 4. Verify that the length of the data is reasonable, about 3300
+     *  counties.
+     */
+
+    var countiesMap = Highcharts.geojson(
+        Highcharts.maps['countries/us/us-nj-all']
+      );
+      // Filter out the state borders and separator lines, we want these
+      // in separate series
+
+    // Add state acronym for tooltip
+
+    document.getElementById('container').innerHTML = 'Rendering map...';
+
+    // Create the map
+    setTimeout(function () { // Otherwise innerHTML doesn't update
+      Highcharts.mapChart('container', {
+        chart: {
+          borderWidth: 1,
+          marginRight: 20 // for the legend
+        },
+
+        title: {
+          text: 'NJ COVID-19 Cases/100K'
+        },
+
+        legend: {
+          layout: 'vertical',
+          align: 'right',
+          floating: true,
+          backgroundColor: ( // theme
+            Highcharts.defaultOptions &amp;&amp;
+            Highcharts.defaultOptions.legend &amp;&amp;
+            Highcharts.defaultOptions.legend.backgroundColor
+          ) || 'rgba(255, 255, 255, 0.85)'
+        },
+
+        mapNavigation: {
+          enabled: true
+        },
+
+        colorAxis: {
+          min: 0,
+          max: 700,
+          tickInterval: 100,
+          stops: [[0, '#F1EEF6'], [0.5, '#900037'], [1, '#500007']],
+          labels: {
+            format: '{value}'
+          }
+        },
+
+
+        plotOptions: {
+          mapline: {
+            showInLegend: false,
+            enableMouseTracking: false
+          }
+        },
+
+        series: [{
+          mapData: countiesMap,
+          data: data,
+          joinBy: ['fips', 'code1'],
+          name: 'COVID-19 Cases',
+          tooltip: {
+            valueSuffix: '/100K'
+          },
+          dataLabels: {
+             enabled: true,
+              color: '#FFFFFF',
+              format: '{point.name}&lt;br&gt;{point.value}'
+         },
+          borderWidth: 0.5,
+          states: {
+            hover: {
+              color: '#a4edba'
+            }
+          },
+          shadow: false
+        }]
+      });
+    }, 0);
+  }
+);
+
+&lt;/script&gt;</content><category term="Test"></category></entry><entry><title>second post</title><link href="/second-post.html" rel="alternate"></link><published>2020-04-10T00:00:00-04:00</published><updated>2020-04-10T00:00:00-04:00</updated><author><name>Yan</name></author><id>tag:None,2020-04-10:/second-post.html</id><content type="html">&lt;h2&gt;Yes, I am here.&lt;/h2&gt;</content><category term="misc"></category></entry></feed>
